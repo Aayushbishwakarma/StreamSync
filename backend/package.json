@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/nodemailer": "^8.0.1",
+    "drizzle-kit": "^0.31.10"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.2",
+    "drizzle-orm": "^0.45.2",
+    "elysia": "^1.4.29",
+    "firebase": "^12.16.0",
+    "nodemailer": "^9.0.3",
+    "postgres": "^3.4.9"
+  }
+}
