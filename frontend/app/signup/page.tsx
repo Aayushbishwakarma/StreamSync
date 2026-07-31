@@ -31,10 +31,10 @@ export default function SignupPage() {
 
     setLoading(true);
     try {
-      // 1. Create the Firebase account
+      // create the Firebase account first
       await signUpWithEmail(email, password);
 
-      // 2. Ask our backend to generate + email an OTP
+      // then ask our backend to generate and email an OTP
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,7 +43,7 @@ export default function SignupPage() {
 
       if (!res.ok) throw new Error("Failed to send OTP email");
 
-      // 3. Go to the OTP verification page
+      // and finally send them to verify it
       router.push(`/verify-otp?email=${encodeURIComponent(email)}`);
     } catch (err: any) {
       setError(err.message);
@@ -166,9 +166,12 @@ export default function SignupPage() {
 
         <p className="text-gray-400 text-sm text-center mt-6">
           Already have an account?{" "}
-          <Link href="/login" className="text-indigo-400">
+          <button
+            onClick={() => router.push("/login")}
+            className="text-indigo-400 hover:underline cursor-pointer"
+          >
             Sign In
-          </Link>
+          </button>
         </p>
       </div>
     </div>

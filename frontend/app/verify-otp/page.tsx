@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function VerifyOtpPage() {
+function VerifyOtpForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
@@ -69,5 +69,16 @@ export default function VerifyOtpPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+// wrapped in Suspense since useSearchParams needs it during static generation
+export default function VerifyOtpPage() {
+  return (
+    <Suspense
+      fallback={<div className="min-h-screen flex items-center justify-center px-4 text-white">Loading...</div>}
+    >
+      <VerifyOtpForm />
+    </Suspense>
   );
 }

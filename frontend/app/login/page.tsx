@@ -3,16 +3,21 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LoginPage() {
   const { signInWithGoogle, signInWithEmail } = useAuth();
   const router = useRouter();
 
+  // form fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // ui state
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // handles the "Continue with Google" button
   const handleGoogleLogin = async () => {
     setError("");
     try {
@@ -23,10 +28,12 @@ export default function LoginPage() {
     }
   };
 
+  // handles the email/password form submit
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+
     try {
       await signInWithEmail(email, password);
       router.push("/");
@@ -39,9 +46,13 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4">
-      <div className="w-14 h-14 rounded-xl bg-indigo-500 flex items-center justify-center mb-4">
-        <span className="text-white text-2xl font-bold">S</span>
-      </div>
+      <Image
+        src="/icons/main_logo.png"
+        alt="StreamSync"
+        width={56}
+        height={56}
+        className="mb-4 rounded-xl"
+      />
       <h1 className="text-white text-2xl font-bold">StreamSync</h1>
       <p className="text-gray-400 text-sm mb-8">Professional Creator Studio</p>
 
