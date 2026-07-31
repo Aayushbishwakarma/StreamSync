@@ -4,8 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run src/index.ts",
-    "socket": "bun run src/socket-server.ts"
+    "dev": "bun run src/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
